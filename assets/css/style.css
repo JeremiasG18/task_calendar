@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'Poppins-BlackItalic';
+    src: url('../font/Poppins-BlackItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-ExtraLight';
+    src: url('../font/Poppins-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('../font/Poppins-Regular.ttf') format('truetype');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins-Regular';
+}
+
+body{
+    background: #555;
+}
+
+.navbar{
+    background: #333;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar__logo{
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.navbar__logo a{
+    text-decoration: none;
+    color: #fff;   
+    font-family: 'Poppins-BlackItalic';
+}
+
+.navbar__links{
+    display: flex;
+    list-style: none;
+}
+
+.navbar__links li a{
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    font-family: 'Poppins-ExtraLight';
+}
+
+.navbar__links li a:hover{
+    font-weight: 800;
+}
+
+.content{
+    padding: 20px;
+}
+
+.title{
+    padding: 10px;
+    color: #fff;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.content-day{
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.content-day:hover{
+    cursor: pointer;
+}
+
+.table-task{
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.table-task thead tr th{
+    padding: 10px;
+    width: 33%;
+}
+
+.table-task tbody tr td{
+    padding: 5px;
+    width: 33%;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+
+.form{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.content__input-task{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.checkbox-task__days{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    flex-wrap: wrap;
+}
+
+.content__input-task input{
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+.content__input-task input[type="submit"]{
+    background-color: #222;
+    color: #fff;
+    font-weight: bold;
+}
+
+.content__input-task input[type="submit"]:hover{
+    background-color: #333;
+}
+
+.table-tasks{
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    border-spacing: 0;
+}
+
+.table-tasks thead tr th{
+    padding: 8px;
+    background-color: #333;
+    width: 33%;
+}
+
+.table-tasks tbody tr td{
+    padding: 4px;
+    width: 33%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.actions button{
+    background-color: #444;
+    border: none;
+    padding: 4px 10px 0px 10px;
+    border-radius: 5px;
+}
+
+.actions button:hover{
+    background-color: #666;
+}
