@@ -17,35 +17,35 @@
             <div class="checkbox-task__days">
                 <div class="content-task__day">
                     <div class="task__day">Lunes</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="lunes"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Lunes"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Martes</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="martes"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Martes"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Miercoles</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="miercoles"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Miercoles"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Jueves</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="jueves"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Mueves"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Viernes</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="viernes"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Viernes"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Sabado</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="sabado"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Sabado"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Domingo</div>
-                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option" value="domingo"></div>
+                    <div class="task__checkbox"><input type="checkbox" class="checkbox" name="option[]" value="Domingo"></div>
                 </div>
                 <div class="content-task__day">
                     <div class="task__day">Todos los dias</div>
-                    <div class="task__checkbox"><input type="checkbox" name="option" id="everyDay" value="todo los dias"></div>
+                    <div class="task__checkbox"><input type="checkbox" name="option[]" id="everyDay" value="Todos los dias"></div>
                 </div>
             </div>
         </div>
