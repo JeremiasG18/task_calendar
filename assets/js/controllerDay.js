@@ -1,7 +1,29 @@
-if (window.location.href.includes('view=calendar')) {
-
+if (window.location.href.includes('view=calendar') || window.location.href == 'http://localhost/task_calendar/') {
     
-
+    const inputCheck = document.querySelectorAll('.checkbox');
+    inputCheck.forEach(checkbox =>{
+        checkbox.addEventListener('click', ()=>{
+            let checkboxClicked = parseInt(checkbox.value);
+            let formData = new FormData();
+            formData.append("accion", "guardarTareaRealizada");
+            formData.append("checkbox", checkboxClicked);
+            const url = 'http://localhost/task_calendar/controller/controlador.php';
+            fetch(url,{
+                method: 'POST',
+                body: formData
+            })
+            // Herramienta de desarrollo --> controlar respuestas del servidor y errores de sintaxis
+            // .then(respuesta => respuesta.json())
+            // .then(data =>{
+            //     console.log(`Respuesta del servidor: ${data.datos}`);
+                
+            // })
+            // .catch(error =>{
+            //     console.error(`No se ha podido mandar los datos al servidor por el error: ${error}`);
+                
+            // })
+        })
+    })
 }
 
 const obtenerDia = ()=>{
@@ -38,7 +60,7 @@ const obtenerDia = ()=>{
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Respuesta del servidor:", data);
+            location.reload();
         })
         .catch(error => {
             console.error("Error al enviar los datos:", error);

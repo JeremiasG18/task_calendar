@@ -3,43 +3,32 @@
     <?php
 
         include 'functions/funciones.php';
-        $consulta = "SELECT d.id, d.dayCalendar, t.task, t.duration, tc.state FROM task_calendar tc INNER JOIN tasks t ON t.id = tc.id_task INNER JOIN days d ON d.id = tc.id_day;";
+        $consulta = "SELECT tc.id, d.dayCalendar, t.task, t.duration, tc.state FROM task_calendar tc INNER JOIN tasks t ON t.id = tc.id_task INNER JOIN days d ON d.id = tc.id_day;";
         $consulta = $con->query($consulta);
-        // foreach ($consulta as $kek) {
-        //     print_r($kek);
-        // }
-        $idDias = [];
-        foreach ($consulta as $dia) {
-            $idDias[] = $dia['id'];
+
+        $calendario = [];
+
+        // Agrupar las tareas por día
+        foreach ($consulta as $datos) {
+            $dia = $datos['dayCalendar'];
+            if (!isset($calendario[$dia])) {
+                $calendario[$dia] = [];
+            }
+            $calendario[$dia][] = [
+                'id_task_calendar' => $datos['id'],
+                'task' => $datos['task'],
+                'duration' => $datos['duration'],
+                'state' => $datos['state']
+            ];
         }
 
-        // var_dump($idDias);
-        $diaNoRepetido = [];
-        for ($i=0; $i < count($idDias)-1; $i++) { 
-            // echo $i+1;
-            echo $idDias[$i+1];
-            if ($idDias[$i+1] !== $idDias[$i]) {
-                $diaNoRepetido[] = $idDias[$i];
-            }
-            // echo $idDias[$i];
-        }
-        var_dump($diaNoRepetido);
-        // $dias = [];
-        foreach ($consulta as $dia) {
-            $dia = obtenerDia($dia['dayCalendar']);
-            for ($i=0; $i < count($idDias); $i++) { 
-                // if ($dia['dia'] !== $dias[$i]) {
-                // }
-            }
-        }
-
-        // var_dump($idDias);
-        
-        foreach ($datos as $dato) {
+        // Mostrar el calendario
+        foreach ($calendario as $dia => $tareas) {
+            $fechaInfo = obtenerDia($dia);
     ?>
     <details class="content-day">
         <summary>
-            <?= $dato['dia']." ".$dato['diaN']." de ".$dato['mes']." del ".$dato['anio']?>
+            <?= $fechaInfo['dia']." ".$fechaInfo['diaN']." de ".$fechaInfo['mes']." del ".$fechaInfo['anio'] ?>
         </summary>
         <table border="1" class="table-task">
             <thead>
@@ -50,11 +39,24 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($tareas as $tarea) { ?>
                 <tr>
-                    <td><?= $dato['tarea'] ?></td>
-                    <td><?= $dato['duracion'] ?></td>
-                    <td><input type="checkbox" value="<?= $dato['estado'] ?>" class="checkbox" name=""></td>
+                    <td><?= $tarea['task'] ?></td>
+                    <td><?= $tarea['duration'] ?></td>
+                    <?php
+                        if ($tarea['state'] == 1) {?>
+                            <td><input type="checkbox" value="<?= $tarea['id_task_calendar'] ?>" class="checkbox" name="checkbox" checked></td>
+                            
+                    <?php
+                        }else{
+                    ?>   
+                            <td><input type="checkbox" value="<?= $tarea['id_task_calendar'] ?>" class="checkbox" name="checkbox"></td>                     
+                    <?php
+                        }
+                    ?>
+                    
                 </tr>
+                <?php } ?>
             </tbody>
         </table>
     </details>

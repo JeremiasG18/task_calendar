@@ -34,6 +34,15 @@
 
             echo json_encode($respuesta);
 
+        }elseif ($_POST['accion'] === 'guardarTareaRealizada'){
+            if (isset($_POST['checkbox']) && $_POST['checkbox'] !== '') {
+                $checkbox = $_POST['checkbox'];
+                $respuesta = actualizarEstadoTarea($checkbox, $con);
+            }else{
+                $respuesta = ['datos' => 'hola'];
+            }
+
+            echo json_encode($respuesta);
         }
     }
 

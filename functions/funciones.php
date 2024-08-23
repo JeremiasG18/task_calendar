@@ -31,7 +31,7 @@
         }
         
         // Agregar la ultima tarea agregada con su respectivo dia en el calendario
-        if (strpos($dias, $dia['dia']) !== false) {
+        if ((strpos($dias, $dia['dia'])) !== false) {
             $insertarTareaConDia = "INSERT INTO task_calendar(`id_day`, `id_task`, `state`) VALUES ($id_last_day, $last_id, 0)";
             $con->query($insertarTareaConDia);
         }
@@ -142,7 +142,41 @@
 
     }
 
+    function actualizarEstadoTarea($id_checkbox, $con){
+        $consultaEstado = "SELECT `state` FROM task_calendar WHERE id = $id_checkbox";
+        $ejecutarConsulta = $con->query($consultaEstado);
+        foreach ($ejecutarConsulta as $estado) {
+            $estado = $estado['state'];
+        }
+
+        if ($estado == 1) {
+            $estado = 0;
+        }else{
+            $estado = 1;
+        }
+
+        $consulta = "UPDATE task_calendar SET `state` = $estado WHERE `id` = $id_checkbox";
+        $ejecutarConsulta = $con->query($consulta);
+        if (!$ejecutarConsulta) {
+            $datos = [
+                "title" => 'Ocurrió un error inesperado!',
+                "text" => 'Ha ocurrido un error inesperado, por favor intente mas tarde!',
+                "icon" => 'error'
+            ];
+        }else{
+            $datos = [
+                "title" => 'Dia Agregado!',
+                "text" => 'Se ha agregado el dia exitosamente!',
+                "icon" => 'success'
+            ];
+        }
+
+        return $datos;
+
+    }
+
     function guardarDia($fecha , $con){
+        // Verifica si ya existe el dia agregado en la db
         $consulta = "SELECT * FROM `days` WHERE dayCalendar = '$fecha'";
         $ejecutarConsulta = $con->query($consulta);
         if ($ejecutarConsulta->num_rows > 0) {
@@ -155,6 +189,26 @@
 
         $consulta = "INSERT INTO `days`(`dayCalendar`) VALUES ('$fecha')";
         $ejecutarConsulta = $con->query($consulta);
+
+        // Busca el ultimo id del dia agregado recientemente
+        $consultaUDiaAgregado = "SELECT MAX(`id`) AS `last_id` FROM `days`";
+        $consultaUDiaAgregado = $con->query($consultaUDiaAgregado);
+        foreach ($consultaUDiaAgregado as $last_id) {
+            $last_id = $last_id['last_id'];
+        }
+
+        $consulta = "SELECT * FROM tasks";
+        $ejecutarConsulta = $con->query($consulta);
+        $obtenerDia = obtenerDia($fecha);
+        foreach ($ejecutarConsulta as $datos) {
+            $diaDeHoy = $obtenerDia['dia'];
+            if ((strpos($datos['day'], $diaDeHoy)) ==  !false) {
+                $dias = $datos['id'];
+                $consulta = "INSERT INTO `task_calendar`(`id_day`, `id_task`, `state`) VALUES ($last_id, $dias, 0)";
+                $con->query($consulta);
+            }
+        }
+        
         if (!$ejecutarConsulta) {
             $datos = [
                 "title" => 'Ocurrió un error inesperado!',
