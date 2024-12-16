@@ -2,7 +2,7 @@
     <div class="title">
         <h1>Nueva Tarea</h1>
     </div>
-    <form action="<?= URL ?>controller/controlador.php" class="form" method="post">
+    <form action="<?= URL ?>ajax/ajax_task.php" class="form" method="post">
         <input type="hidden" name="accion" value="guardarTarea">
         <div class="content__input-task">
             <label for="tarea">Tarea</label>

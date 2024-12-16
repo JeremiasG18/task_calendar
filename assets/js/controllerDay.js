@@ -52,7 +52,7 @@ const obtenerDia = ()=>{
     formData.append("fecha", fechaFormateada);
     formData.append("accion", "guardarDia");
 
-    if (tiempoFormateado == '00:00:00') {
+    if (tiempoFormateado == '14:00:00') {
         let url = 'http://localhost/task_calendar/controller/controlador.php';
         fetch(url, {
             method: "POST",
